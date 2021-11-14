@@ -1,0 +1,6 @@
+[ERROR][note.go:13]2021/11/10 15:08:42 [[Dao] AddNote error : %v Error 1366: Incorrect integer value: '' for column 'created_time' at row 1]
+[ERROR][note.go:13]2021/11/10 15:11:43 [[Dao] AddNote error : %v Error 1366: Incorrect integer value: '' for column 'created_time' at row 1]
+[ERROR][note.go:13]2021/11/10 15:14:17 [[Dao] AddNote error : %v Error 1366: Incorrect integer value: '' for column 'created_time' at row 1]
+[ERROR][note.go:13]2021/11/10 15:21:32 [[Dao] AddNote error : %v Error 1366: Incorrect integer value: '' for column 'created_time' at row 1]
+[ERROR][note.go:13]2021/11/10 15:22:06 [[Dao] AddNote error : %v Error 1366: Incorrect integer value: '' for column 'created_time' at row 1]
+[ERROR][note.go:13]2021/11/10 15:30:41 [[Dao] AddNote error : %v Error 1366: Incorrect integer value: '' for column 'created_time' at row 1]
