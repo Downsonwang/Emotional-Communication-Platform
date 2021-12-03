@@ -15,18 +15,22 @@ import (
 	"regexp"
 )
 
-func GetEmailRegisterInfo(args *models.RegUserInfoArgs) (bool, string) {
-	fmt.Println(args.Email,args.Password)
-	if args.Email == "" {
-		return false, "邮箱不能为空"
+type RegisterInfoService struct {
+}
+
+var authInfoDao = dao.DaoGroupInfo.RegDaoGroup.RegDaoInfo
+
+func (regInfoService *RegisterInfoService) SendCodeInfo(email string) (fcode string, b bool, msg string) {
+	if email == "" {
+		return "", false, "邮箱信息为空,请重新填写!"
 	}
 
-	if VertifyEmailFormat(args.Email) == false {
-		return false, "邮箱格式不对"
+	if VertifyEmailFormat(email) == false {
+		return "", false, "邮箱格式不对,请重新确认格式!"
 	}
 	e := email2.NewEmail()
 	e.From = "茄子交流 <downsonliteracy@foxmail.com>"
-	e.To = []string{args.Email}
+	e.To = []string{email}
 	e.Subject = "你好,这里是星座情感交流中心."
 	//设置文件发送的内容
 	code := GenValidateCode(6)
@@ -39,13 +43,19 @@ func GetEmailRegisterInfo(args *models.RegUserInfoArgs) (bool, string) {
 		log.Fatal(err)
 
 	}
-	_, err = dao.GetEmailRegisterInfo(&models.RegUserInfoArgs{Email: args.Email, Code: code,Password: args.Password})
-	if err != nil {
-		log.Fatal(err)
+	//authInfoDao.GetEmailRegisterInfo()
+	//authInfoDao.GetEmailRegisterInfo(&models.RegUserInfoArgs{Email: email,Code: code,Password: ""})
+	b, _ = authInfoDao.GetEmailCodeInfo(email, code)
+
+	return code, true, "验证码确认中."
+}
+func (regInfoService *RegisterInfoService) GetEmailRegisterInfo(args *models.RegUserInfoArgs) bool {
+	code := authInfoDao.GetSqlCodeInfo(args)
+	if code == args.Code {
+		_ = authInfoDao.UpdateEmailPasswordInfo(args)
+		return true
 	}
-
-	return true, ""
-
+	return false
 }
 
 func VertifyEmailFormat(email string) bool {

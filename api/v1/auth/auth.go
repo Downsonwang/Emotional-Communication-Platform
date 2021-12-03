@@ -12,14 +12,14 @@ import (
 
 func GetAuth(c *gin.Context) {
 	username := c.Query("username")
-	password := c.Query("password")
+	password := c.Query("pwd")
 	valid := validation.Validation{}
 	auth := &models.ApiAuth{Username: username, Password: password}
 	ok, _ := valid.Valid(auth)
 	data := make(map[string]interface{}) // 存储token
 	code := ecode.Request_Params_ERROR
 	if ok {
-		isExist,_:= jwt.CheckAuth(username, password)
+		isExist, _ := jwt.CheckAuth(username, password)
 		if isExist {
 			token, err := jwt.CreateToken(username, password)
 			if err != nil {
@@ -33,13 +33,13 @@ func GetAuth(c *gin.Context) {
 		}
 	} else {
 		for _, err := range valid.Errors {
-			log.Error(err.Key,err.Message)
+			log.Error(err.Key, err.Message)
 		}
 	}
 	// 返回
-	c.JSON(http.StatusOK,gin.H{
-		"code" : code,
-		"msg" : ecode.GetMsg(code),
-		"data" : data,
+	c.JSON(http.StatusOK, gin.H{
+		"code": code,
+		"msg":  ecode.GetMsg(code),
+		"data": data,
 	})
 }

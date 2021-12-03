@@ -1,4 +1,4 @@
-package dao
+package note
 
 import (
 	"Gin/models"
@@ -9,7 +9,13 @@ import (
 
 const NoteTable = "note"
 
-func AddNote(args models.GetNoteInfoArgs) bool {
+type NoteDaoGroup struct {
+	NoteInfoDao
+}
+type NoteInfoDao struct {
+}
+
+func (noteInfoDao *NoteInfoDao) AddNote(args models.GetNoteInfoArgs) bool {
 	err := db2.Db.Table(NoteTable).Create(&args).Error
 	if err != nil {
 		log.Error("[Dao] AddNote error : %v", err)
@@ -19,7 +25,7 @@ func AddNote(args models.GetNoteInfoArgs) bool {
 
 }
 
-func EditNote(args models.EditNoteInfoArgs) (res models.DelOrEditReply) {
+func (noteInfoDao *NoteInfoDao) EditNote(args models.EditNoteInfoArgs) (res models.DelOrEditReply) {
 	fmt.Println(args.Id)
 	noteInfo := &models.GetNoteInfoArgs{
 		Title:       args.Title,
@@ -42,7 +48,7 @@ func EditNote(args models.EditNoteInfoArgs) (res models.DelOrEditReply) {
 	return res
 }
 
-func DelNote(args models.DelNoteInfoArgs) (res models.DelOrEditReply) {
+func (noteInfoDao *NoteInfoDao) DelNote(args models.DelNoteInfoArgs) (res models.DelOrEditReply) {
 
 	i := db2.Db.Table(NoteTable).Where("id = ? ", args.Id).Delete(&models.GetNoteInfoArgs{}).RowsAffected
 	if i > 0 {
@@ -56,22 +62,22 @@ func DelNote(args models.DelNoteInfoArgs) (res models.DelOrEditReply) {
 
 }
 
-func QueryNote(args models.QueryNoteArgs) (res []models.QueryNoteInfoReply) {
+func (noteInfoDao *NoteInfoDao) QueryNote(args models.QueryNoteArgs) (res []models.QueryNoteInfoReply) {
 	var info []models.QueryNoteInfoReply
-     db2.Db.Table(NoteTable).Find(&info).Limit(args.PageNum).Offset(args.PageSize)
-	 /*
-	 if i > 0 {
-		 return info
-	 }else{
-          return
-	 }
+	db2.Db.Table(NoteTable).Find(&info).Limit(args.PageNum).Offset(args.PageSize)
+	/*
+			 if i > 0 {
+				 return info
+			 }else{
+		          return
+			 }
 
-	  */
+	*/
 	return info
 }
 
-func QueryNoteByID(args models.QueryNoteByIDArgs) (res models.QueryNoteInfoReply) {
-     var info models.QueryNoteInfoReply
-	 db2.Db.Table(NoteTable).Where("id = ?",args.Id).Find(&info)
-	 return info
+func (noteInfoDao *NoteInfoDao) QueryNoteByID(args models.QueryNoteByIDArgs) (res models.QueryNoteInfoReply) {
+	var info models.QueryNoteInfoReply
+	db2.Db.Table(NoteTable).Where("id = ?", args.Id).Find(&info)
+	return info
 }

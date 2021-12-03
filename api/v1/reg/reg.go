@@ -2,28 +2,52 @@ package reg
 
 import (
 	"Gin/models"
-	"Gin/service/register"
-	"fmt"
+	"Gin/service"
 	"github.com/gin-gonic/gin"
-	"go.uber.org/zap"
-	"log"
 	"net/http"
 )
 
 // 注册用户
-func CreateUser(c *gin.Context) {
+var authInfoService = service.ServiceGroupInfo.ResisterServiceGroup.RegisterInfoService
+
+func CheckSendEmail(c *gin.Context) {
 
 	email := c.PostForm("email")
-	password := c.PostForm("password")
-	code := c.PostForm("code")
-	fmt.Println("email",email)
-	fmt.Println("password",password)
-	b,err := register.GetEmailRegisterInfo(&models.RegUserInfoArgs{Email: email,Code: code,Password: password})
+	code, b, msg := authInfoService.SendCodeInfo(email)
+	if b == true {
+		c.JSON(http.StatusOK, gin.H{
+			"code": code,
+			"msg":  msg,
+			"bool": b,
+		})
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"bool": b,
+		})
+	}
+	/**
+	b,err := authInfoService.GetEmailRegisterInfo(&models.RegUserInfoArgs{Email: email,Password: password})
 	if err != "" {
 		log.Default().Print("[api]CreateUser", zap.Any("err", err))
 	}
-	c.JSON(http.StatusOK,gin.H{
-		"status":b,
+	if b == true {
+		c.JSON(http.StatusOK, gin.H{
+			"code":
 		})
+	}
+
+	*/
+}
+
+func CreateUser(c *gin.Context) {
+	email := c.PostForm("email")
+	code := c.PostForm("code")
+	password := c.PostForm("password")
+
+	b := authInfoService.GetEmailRegisterInfo(&models.RegUserInfoArgs{Email: email, Code: code, Password: password})
+
+	c.JSON(http.StatusOK, gin.H{
+		"bool": b,
+	})
 
 }

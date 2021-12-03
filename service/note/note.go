@@ -5,33 +5,36 @@ import (
 	"Gin/models"
 	"fmt"
 )
+
 type NoteInfoService struct {
-
 }
-func (noteInfoService *NoteInfoService)AddNote(args models.GetNoteInfoArgs) bool{
-    fmt.Println(args.Content)
-	b := dao.AddNote(args)
+
+var noteInfoDao = dao.DaoGroupInfo.NoteDaoGroup.NoteInfoDao
+
+func (noteInfoService *NoteInfoService) AddNote(args models.GetNoteInfoArgs) bool {
+	fmt.Println(args.Content)
+	b := noteInfoDao.AddNote(args)
 	return b
 
 }
 
-func (noteInfoService *NoteInfoService)EditNote(args models.EditNoteInfoArgs) (res models.DelOrEditReply){
-	  res = dao.EditNote(args)
+func (noteInfoService *NoteInfoService) EditNote(args models.EditNoteInfoArgs) (res models.DelOrEditReply) {
+	res = noteInfoDao.EditNote(args)
 
-	  return res
+	return res
 }
 
-func (noteInfoService *NoteInfoService)DelNote(args models.DelNoteInfoArgs) (res models.DelOrEditReply){
-	b := dao.DelNote(args)
+func (noteInfoService *NoteInfoService) DelNote(args models.DelNoteInfoArgs) (res models.DelOrEditReply) {
+	b := noteInfoDao.DelNote(args)
 	return b
 }
 
-func (noteInfoService *NoteInfoService)QueryNote(args models.QueryNoteArgs) (res []models.QueryNoteInfoReply){
-   res = dao.QueryNote(args)
-   return res
+func (noteInfoService *NoteInfoService) QueryNote(args models.QueryNoteArgs) (res []models.QueryNoteInfoReply) {
+	res = noteInfoDao.QueryNote(args)
+	return res
 }
 
-func (noteInfoService *NoteInfoService)QueryNoteByID(args models.QueryNoteByIDArgs) (res models.QueryNoteInfoReply) {
-	res = dao.QueryNoteByID(args)
+func (noteInfoService *NoteInfoService) QueryNoteByID(args models.QueryNoteByIDArgs) (res models.QueryNoteInfoReply) {
+	res = noteInfoDao.QueryNoteByID(args)
 	return res
 }
