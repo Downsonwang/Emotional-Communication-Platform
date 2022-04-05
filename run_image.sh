@@ -1,0 +1,1 @@
+docker run 0p 8082:8000 kelvinwang

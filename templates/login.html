@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<meta charset="utf-8">
+		<link href="../../static/css/style.css" rel='stylesheet' type='text/css' />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0);
+			}, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+		<!--webfonts-->
+		<!--//webfonts-->
+
+	<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+
+</head>
+
+
+<body>
+	<div class="main">
+		<div class="header" >
+			<h1>登录或创建一个免费帐户！</h1>
+		</div>
+		<p></p>
+		      <form action="#" id="form" method="post">
+				<ul class="left-form">
+					<!--
+					<h2>新账户:</h2>
+					<li>
+						<input type="text" name="Username" id="Username"  placeholder="Username" required/>
+						<a href="#" class="icon ticker"> </a>
+						<div class="clear"> </div>
+					</li>
+					-->
+
+					<li>
+						<input type="text" name="username" id="username" placeholder="username" required/>
+						<span id="s_username"></span>
+						<div class="clear"> </div>
+					</li>
+
+					<li>
+						<input type="password" name="password" id="password" placeholder="password" required/>
+						<span id="s_password" class="error"></span>
+						<div class="clear"> </div>
+					</li>
+
+
+					<input type="submit"  value="创建账户" onclick="sendMessage()">
+
+				</ul>
+			  </form>
+		<form action="login" method="post">
+			<ul class="right-form">
+				<h3>登录:</h3>
+				<div>
+					<li><input type="text" name="zh" id="zh" placeholder="Username" required/></li>
+					<li> <input type="password" name="mm" id="mm" placeholder="Password" required/></li>
+					<h4>I forgot my Password!</h4>
+					<input type="submit" value="登录" >
+				</div>
+				<div class="clear"> </div>
+			</ul>
+			<div class="clear"> </div>
+
+		</form>
+			
+		</div>
+
+	<script type="text/javascript">
+
+        window.onload = function (){
+			document.getElementById("form").onsubmit = function() {
+				return checkUsername() && checkPassword();
+			}
+			document.getElementById("username").onblur = checkUsername
+			document.getElementById("password").onblur = checkPassword
+		}
+		function checkUsername() {
+			var username = document.getElementById("username").value
+			var reg = /^\w{6,12}$/;
+			var flag = reg.test(username);
+			var s_username = document.getElementById("s_username").value
+			if (flag) {
+				s_username.innerText = "Y";
+				s_username.className = "正确"
+			}else{
+				s_username.innerText = "N";
+				s_username.className = "错误";
+			}
+			return flag;
+		}
+		function checkPassword() {
+			var password = document.getElementById("password").value
+			var reg = /^\w{6,12}$/;
+			var flag = reg.test(password);
+			var s_password = document.getElementById("s_password").value
+			if (flag) {
+				s_password.innerText = "Y";
+				s_password.className = "正确"
+			}else{
+				s_password.innerText = "N";
+				s_password.className = "错误";
+			}
+			return flag;
+		}
+		function sendMessage() {
+
+			var username=$('#username').val()
+			var password=$('#password').val()
+			if (username != ""){
+
+				$.ajax({
+					type: "POST",
+					dataType : "text",
+					url: 'reg',
+					data: "username=" + username + "password=" + password,
+					error: function (XMLHttpRequest, textStatus, errorThrown) { },
+					success: function (msg){
+
+
+					}
+				});
+			}else{
+				alert("邮箱不能为空");
+			}
+		}
+
+
+	</script>
+</body>
+</html>

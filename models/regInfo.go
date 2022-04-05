@@ -5,11 +5,13 @@ type RegInfo struct {
 	Email    string `gorm:"email" json:"email"`
 	Password string `gorm:"password" json:"password"`
 	Code     string `gorm:"code" json:"code"`
+	UserID   int64  `gorm:"user_id" json:"user_id"`
 }
 type RegEmailCodeInfoArgs struct {
 	Email    string `gorm:"email;primary_key;unique" json:"email" binding:"omitempty,email" validate:"required"`
 	Code     string `gorm:"code" json:"code" binding:"omitempty,code" validate:"required"`
 	Password string `gorm:"password" json:"password"  validate:"required"`
+	UserID   int64  `gorm:"user_id" json:"user_id"`
 }
 type RegUserInfoArgs struct {
 	Email    string `gorm:"email;primary_key;unique" json:"email" binding:"omitempty,email" validate:"required"`

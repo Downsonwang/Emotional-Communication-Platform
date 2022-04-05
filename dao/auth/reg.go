@@ -4,8 +4,10 @@ import (
 	"Gin/models"
 	db2 "Gin/pkg/db"
 	"fmt"
-	"github.com/jinzhu/gorm"
 	"log"
+
+	"github.com/jinzhu/gorm"
+	"github.com/spf13/cast"
 )
 
 type RegDaoGroup struct {
@@ -26,6 +28,7 @@ func (regDaoInfo *RegDaoInfo) GetEmailCodeInfo(email string, code string) (bool,
 	args.Email = email
 	args.Code = code
 	args.Password = code
+	args.UserID = cast.ToInt64(code)
 	if err != nil {
 		if gorm.IsRecordNotFoundError(err) {
 			i := db2.Db.Table(ActivityTable).Create(&args).RowsAffected

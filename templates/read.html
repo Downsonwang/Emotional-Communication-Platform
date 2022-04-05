@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width" />
+    <title>文章阅读</title>
+    <link rel="stylesheet" href="../../static/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../static/layui/css/layui.css" />
+    <link rel="stylesheet" href="../../static/css/master.css" />
+    <link rel="stylesheet" href="../../static/css/gloable.css" />
+    <link rel="stylesheet" href="../../static/css/nprogress.css" />
+    <link rel="stylesheet" href="../../static/css/blog.css" />
+</head>
+<!--<script type="text/javascript">-->
+<!--    function insert(){-->
+<!--        //取出输入内容-->
+<!--        var content=document.getElementById('textarea').value;-->
+<!--        // var author=document.getElementById('author').value;-->
+
+<!--        //ajax应用-->
+<!--        var xhr=new XMLHttpRequest();-->
+<!--        xhr.open('get',"textarea?content="+content);-->
+<!--        xhr.send(null);-->
+<!--        xhr.onreadystatechange=function(){-->
+<!--            if(xhr.readyState==4&&xhr.status==200){-->
+<!--                if(xhr.responseText){-->
+<!--                    //追加显示响应的最新数据内容-->
+<!--                    document.getElementById('list').innerHTML=xhr.responseText;-->
+<!--                }else{-->
+<!--                    alert("添加失败！");-->
+<!--                }-->
+<!--            }-->
+<!--        }-->
+<!--    }-->
+
+<!--</script>-->
+<body>
+    <div class="header">
+    </div>
+    <header class="gird-header">
+        <div class="header-fixed">
+            <div class="header-inner">
+                <a href="javascript:void(0)" class="header-logo" id="logo">Mr.Wang</a>
+                <nav class="nav" id="nav">
+                    <ul>
+                        <li><a href="index.html">首页</a></li>
+                        <li><a href="article.html">博客</a></li>
+                        <li><a href="message.html">留言</a></li>
+                        <li><a href="link.html">友链</a></li>
+                    </ul>
+                </nav>
+                <a href="#" class="blog-user">
+                    <i class="fa fa-qq"></i>
+                </a>
+                <a class="phone-menu">
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                </a>
+            </div>
+        </div>
+    </header>
+    <div class="doc-container" id="doc-container">
+        <div class="container-fixed">
+            <div class="col-content" style="width:100%">
+                <div class="inner">
+                    <article class="article-list">
+                        <input type="hidden" value="@Model.BlogTypeID" id="blogtypeid" />
+                        <section class="article-item">
+                            <aside class="title" style="line-height:1.5;">
+                                <h4>IDEA 破解版下载</h4>
+                                <p class="fc-grey fs-14">
+                                    <small>
+                                        作者:<a href="javascript:void(0)" target="_blank" class="fc-link">downsonwang</a>
+                                    </small>
+                                    <small class="ml10">围观群众：<i class="readcount">37</i></small>
+                                    <small class="ml10">更新于 <label>2020-09-20</label> </small>
+                                </p>
+                            </aside>
+                            <div class="time mt10" style="padding-bottom:0;">
+                                <span class="day">20</span>
+                                <span class="month fs-18">09<small class="fs-14">月</small></span>
+                                <span class="year fs-18">2019</span>
+                            </div>
+                            <div class="content artiledetail" style="border-bottom: 1px solid #e1e2e0; padding-bottom: 20px;">
+                                Hello My Friends,Hello World.
+                                <div class="copyright mt20">
+                                    <p class="f-toe fc-black">
+                                        To remember,to let go,and to move on.
+                                    </p>
+                                    <p class="f-toe">
+                                        本文标题：
+                                        <a href="javascript:void(0)" class="r-title">IDEA破解版下载</a>
+                                    </p>
+                                    <p class="f-toe">
+                                        本文网址：
+                                        <a href="https://pan.baidu.com/s/1gJJ-VhXPD90bQuGSwlocYg">
+                                            链接: https://pan.baidu.com/s/1gJJ-VhXPD90bQuGSwlocYg
+                                            提取码: yq1v
+
+                                        </a>
+                                    </p>
+                                </div>
+                                <div id="aplayer" style="margin:5px 0"></div>
+                                <h6>延伸阅读</h6>
+                                <ol class="b-relation"></ol>
+                            </div>
+                            <div class="bdsharebuttonbox share" data-tag="share_1">
+                                <ul>
+                                    <li class="f-praise"><span><a class="s-praise"></a></span></li>
+                                    <li class="f-weinxi"><a class="s-weinxi" data-cmd="weixin"></a></li>
+                                    <li class="f-sina"><a class="s-sina" data-cmd="tsina"></a></li>
+                                    <li class="f-qq" href="#"><i class="fa fa-qq"></i></li>
+                                    <li class="f-qzone"><a class="s-qzone" data-cmd="qzone"></a></li>
+                                </ul>
+                            </div>
+                            <div class="f-cb"></div>
+                            <div class="mt20 f-fwn fs-24 fc-grey comment" style="border-top: 1px solid #e1e2e0; padding-top: 20px;">
+                            </div>
+                            <fieldset class="layui-elem-field layui-field-title">
+                                <legend>发表评论</legend>
+                                <div class="layui-field-box">
+                                    <div class="leavemessage" style="text-align:initial">
+                                        <form class="layui-form blog-editor" action="textarea" method="post" name="tt">
+                                            <input type="hidden" name="articleid" id="articleid" value="@Model.ID">
+                                            <div class="layui-form-item">
+                                                <textarea class = "js-whiteboard-textarea-input" rows="5" cols="100" maxlength = "400" id="textarea" name="textarea" placeholder="说点什么吧……" style = "resize: none"></textarea><br/><br/>
+<!--                                                <textarea name="editorContent" lay-verify="content" id="remarkEditor" placeholder="请输入内容" class="layui-textarea layui-hide"></textarea>-->
+                                            </div>
+                                            <div class="layui-form-item">
+                                                <button class="layui-btn"  lay-submit="formLeaveMessage" lay-filter="formLeaveMessage">提交留言</button>
+                                            </div>
+                                        </form>
+                                        <div id="list"></div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <ul class="blog-comment" id="blog-comment"></ul>
+                        </section>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="grid-footer">
+        <div class="footer-fixed">
+            <div class="copyright">
+                <div class="info">
+                    <div class="contact">
+                        <a href="javascript:void(0)" class="github" target="_blank"><i class="fa fa-github"></i></a>
+                        <a href="#" class="qq" target="_blank" ><i class="fa fa-qq"></i></a>
+                        <a href="#" class="email" target="_blank" ><i class="fa fa-envelope"></i></a>
+                        <a href="javascript:void(0)" class="weixin"><i class="fa fa-weixin"></i></a>
+                    </div>
+                    <p class="mt05">
+                        Thankyou YSS,Thankyou Sir.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="../../static/layui/layui.js"></script>
+    <script src="../../static/js/yss/gloable.js"></script>
+    <script src="../../static/js/plugins/nprogress.js"></script>
+    <script src="../../static/js/pagecomment.js"></script>
+    <script>NProgress.start();</script>
+    <script> 
+        window.onload = function () {
+            NProgress.done();
+        };
+    </script>
+</body>
+</html>

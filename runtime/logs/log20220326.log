@@ -1,0 +1,3 @@
+[WARN][note.go:54]2022/03/26 20:57:23 [[Dao] Edit note have no influence in this data !!!]
+[WARN][note.go:54]2022/03/26 20:58:27 [[Dao] Edit note have no influence in this data !!!]
+[ERROR][note.go:25]2022/03/26 21:13:43 [[Dao] AddNote error : %v Error 1366: Incorrect integer value: '' for column 'news_id' at row 1]

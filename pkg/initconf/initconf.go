@@ -7,17 +7,16 @@ import (
 )
 
 var (
-	Cfg          *ini.File
+	Cfg *ini.File
 
-	Port         int
-	PageSize     int
+	Port     int
+	PageSize int
 
-	RunMode      string
-	JwtSecret    string
+	RunMode   string
+	JwtSecret string
 
 	ReadTimeout  time.Duration
 	WriteTimeout time.Duration
-
 )
 
 func init() {

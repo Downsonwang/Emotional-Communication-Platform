@@ -13,10 +13,13 @@ const (
 	Email_PASSWORD_NULL_ERROR      = 10007
 	EmailCodeFailed                = 10012
 
-	CreateNoteFailed = 10008
-	EditNoteFailed   = 10009
-	DelNoteFailed    = 10010
-	QueryNoteFailed  = 10011
+	CreateNoteFailed    = 10008
+	EditNoteFailed      = 10009
+	DelNoteFailed       = 10010
+	QueryNoteFailed     = 10011
+	QueryNoteTopNFailed = 10014
+	AddCommentSuccess   = 10012
+	AddCommentFailed    = 10013
 )
 
 var MsgStatus = map[int]string{
@@ -32,6 +35,9 @@ var MsgStatus = map[int]string{
 	EditNoteFailed:                 "修改帖子失败",
 	DelNoteFailed:                  "删除帖子失败",
 	QueryNoteFailed:                "查询帖子失败",
+	AddCommentSuccess:              "添加评论成功",
+	AddCommentFailed:               "添加评论失败",
+	QueryNoteTopNFailed:            "获取文章top热度失败",
 }
 
 func GetMsg(code int) string {

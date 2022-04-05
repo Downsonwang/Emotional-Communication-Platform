@@ -12,34 +12,42 @@ type Note struct {
 }
 
 type GetNoteInfoArgs struct {
+	ID          int64  `form:"id" json:"id" binding:"required"`
 	Title       string `form:"title" json:"title" binding:"required"`
 	Desc        string `form:"desc" json:"desc" binding:"required"`
 	Content     string `form:"content" json:"content" binding:"required"`
 	User        string `form:"user" json:"user" binding:"required"`
-	CreatedTime int64 `form:"createdTime" json:"created_time"`
-	UpdatedTime int64 `form:"updatedTime"json:"updated_time"`
+	NewsID      int64  `form:"news_Id" json:"news_Id" binding:"required"`
+	Support     int    `form:"support" json:"support" binding:"required"`
+	Label       int    `form:"Label" json:"label" binding:required`
+	CreatedTime string `form:"createdTime" json:"created_time"`
+	UpdatedTime string `form:"updatedTime"json:"updated_time"`
 }
 type EditNoteInfoArgs struct {
-	Id int `form:"id" json:"id" binding:"required"`
+	Id          int    `form:"id" json:"id" binding:"required"`
 	Title       string `form:"title" json:"title" binding:"required"`
 	Desc        string `form:"desc" json:"desc" binding:"required"`
 	Content     string `form:"content" json:"content" binding:"required"`
 	User        string `form:"user" json:"user" binding:"required"`
-	CreatedTime int64 `form:"createdTime" json:"created_time"`
-	UpdatedTime int64 `form:"updatedTime" json:"updated_time"`
+	Support     int    `form:"support" json:"support" binding:"required"`
+	Label       int    `form:"Label" json:"label" binding:required`
+	UpdatedTime string `form:"updatedTime" json:"updated_time"`
 }
 
 type DelNoteInfoArgs struct {
 	Id int `json:"id" form:"id"`
 }
 type DelOrEditReply struct {
-	Bool bool 		`json:"bool"`
+	Bool bool `json:"bool"`
 }
 type QueryNoteInfoReply struct {
+	ID          string `json:"id"`
 	Title       string `json:"title"`
 	Desc        string `json:"desc"`
 	Content     string `json:"content"`
 	User        string `json:"user"`
+	Support     int    `form:"support" json:"support" binding:"required"`
+	Label       int    `form:"Label" json:"label" binding:required`
 	CreatedTime string `json:"created_time"`
 	UpdatedTime string `json:"updated_time"`
 }
@@ -50,5 +58,34 @@ type QueryNoteArgs struct {
 }
 
 type QueryNoteByIDArgs struct {
-    Id int `json:"id" form:"id" binding:"required" `
+	Id int `json:"id" form:"id" binding:"required" `
+}
+
+type GetNoteHotSortingBangArgs struct {
+	Id      int `json:"id" form:"id" binding:"required"`
+	LoveNum int `json:"love_num" form:"love_num" binding:"required"`
+}
+
+type GetNoteHotSortingBangReply struct {
+	Id int `json:"id" form:"id" binding:"required"`
+}
+type PayForYourLovePassageArgs struct {
+	Id     int    `json:"id" form:"id" binding:"required"`
+	Packet string `json:"support" form:"support" gorm:"support" `
+}
+type PayForYourLovePassageReply struct {
+	Id      int    `json:"id"`
+	Support string `json:"passport"`
+}
+
+type GetNoteHotSortingBangTopAllNReply struct {
+	ID          int64  `json:"id"`
+	Title       string `json:"title"`
+	Desc        string `json:"desc"`
+	Content     string `json:"content"`
+	User        string `json:"user"`
+	Support     int    `form:"support" json:"support" binding:"required"`
+	Label       int    `form:"Label" json:"label" binding:required`
+	CreatedTime string `json:"created_time"`
+	UpdatedTime string `json:"updated_time"`
 }

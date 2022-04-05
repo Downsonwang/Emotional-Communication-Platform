@@ -16,6 +16,7 @@ func GetAuth(c *gin.Context) {
 	valid := validation.Validation{}
 	auth := &models.ApiAuth{Username: username, Password: password}
 	ok, _ := valid.Valid(auth)
+
 	data := make(map[string]interface{}) // 存储token
 	code := ecode.Request_Params_ERROR
 	if ok {
@@ -42,4 +43,5 @@ func GetAuth(c *gin.Context) {
 		"msg":  ecode.GetMsg(code),
 		"data": data,
 	})
+
 }

@@ -3,9 +3,11 @@ package jwt
 import (
 	"Gin/models"
 	"Gin/pkg/initconf"
-	"github.com/dgrijalva/jwt-go"
+	"fmt"
 	"log"
 	"time"
+
+	"github.com/dgrijalva/jwt-go"
 )
 
 var jwtSecret = []byte(initconf.JwtSecret)
@@ -29,6 +31,7 @@ func CreateToken(username, password string) (string, error) {
 // parse token
 func ParseToken(token string) (*models.Claims, error) {
 	tokenClaims, err := jwt.ParseWithClaims(token, &models.Claims{}, func(token *jwt.Token) (interface{}, error) {
+		fmt.Println(jwtSecret)
 		return jwtSecret, nil
 	})
 	if err != nil {

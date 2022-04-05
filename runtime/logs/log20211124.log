@@ -1,0 +1,3 @@
+[ERROR][auth.go:36]2021/11/24 14:51:15 [Password.Required. Password Can not be empty]
+[ERROR][auth.go:36]2021/11/24 14:51:54 [Password.Required. Password Can not be empty]
+[ERROR][auth.go:36]2021/11/24 14:52:17 [Password.Required. Password Can not be empty]
