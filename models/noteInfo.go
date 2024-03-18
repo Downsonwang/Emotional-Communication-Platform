@@ -1,8 +1,11 @@
 package models
 
+import "sync"
+
 // 文章 models
 
 type Note struct {
+	ID          int    `json:"id"`
 	Title       string `json:"title"`
 	Desc        string `json:"desc"`
 	Content     string `json:"content"`
@@ -88,4 +91,40 @@ type GetNoteHotSortingBangTopAllNReply struct {
 	Label       int    `form:"Label" json:"label" binding:required`
 	CreatedTime string `json:"created_time"`
 	UpdatedTime string `json:"updated_time"`
+}
+
+type RecommendArgs struct {
+	ID int `json:"id"`
+}
+
+type RecommendReply struct {
+	ID          string `json:"id"`
+	Title       string `json:"title"`
+	Desc        string `json:"desc"`
+	Content     string `json:"content"`
+	User        string `json:"user"`
+	Support     int    `form:"support" json:"support" binding:"required"`
+	Label       int    `form:"Label" json:"label" binding:required`
+	CreatedTime string `json:"created_time"`
+	UpdatedTime string `json:"updated_time"`
+}
+
+type UserAndPostIntersection struct {
+	UserID   int `json:"user_id"`
+	FriendID int `json:"friend_id"`
+	PostID   int `json:"post_id"`
+	//BrowseTime int `json:"browse_time"`
+	Comment int `json:"comment"`
+	Support int `json:"support"`
+	Like    int `json:"like"`
+	Label   int `json:"label"`
+}
+
+type RecommendPosts struct {
+	Posts []Note `json:"posts"`
+}
+
+type RecommendPostsCache struct {
+	sync.RWMutex
+	items map[string]*RecommendPosts
 }

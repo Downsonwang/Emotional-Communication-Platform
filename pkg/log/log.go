@@ -1,16 +1,20 @@
+/*
+ * @Descripttion:
+ * @Author:
+ * @Date: 2024-03-18 00:06:51
+ * @LastEditTime: 2024-03-18 00:08:53
+ */
 package log
 
 import (
-
 	"fmt"
 	"log"
 	"os"
 	"path/filepath"
 	"runtime"
 )
+
 type Level int
-
-
 
 const (
 	DEBUG Level = iota
@@ -35,7 +39,7 @@ func init() {
 	filePath := getLogFileFullPath()
 	file = openLogFile(filePath)
 
-	logger = log.New(file, DefaultPreffix, log.LstdFlags)
+	//logger = log.New(file, DefaultPreffix, log.LstdFlags)
 }
 
 func Debug(v ...interface{}) {

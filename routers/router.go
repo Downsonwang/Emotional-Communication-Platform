@@ -102,5 +102,9 @@ func InitRouter() *gin.Engine {
 		apiv1.POST("/tags/del", v1.ApiGroupInfo.TagApiGroup.DeleteTag)  //删除文章标签
 	}
 
+	apiv1.Use(jwt.JWT())
+	{
+		apiv1.GET("/note/recommend",)
+	}
 	return r
 }
